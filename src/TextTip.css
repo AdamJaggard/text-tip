@@ -1,0 +1,90 @@
+.texttip {
+	position: fixed;
+	pointer-events: none;
+	background: #fff;
+	transform: translate(-50%, -12px);
+	transition: none;
+	opacity: 0;	
+}
+
+.texttip--theme-default {
+	border-radius: 7px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .55);
+	transform: translate(-50%, -34px);
+	border: 2px solid #000;
+}
+
+.texttip--theme-default::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, 0);
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 6px 9px 0 9px;
+	border-color: #000 transparent transparent transparent;
+}
+
+.texttip--show {
+	pointer-events: auto;
+	transform: translate(-50%, -12px);
+	opacity: 1;
+}
+
+.texttip--theme-default.texttip--show {
+	transition: opacity .3s, transform .3s;
+}
+
+.texttip__inner {
+	position: relative;
+	display: flex;
+	overflow: hidden;
+}
+
+.texttip--theme-default .texttip__inner {
+	border-radius: 7px;
+}
+
+.texttip__btn {
+	cursor: pointer;
+	padding: .4em;
+	transition: none;
+}
+
+.texttip--theme-default .texttip__btn {
+	transform: translate(0, 1.5em);
+}
+
+.texttip--theme-default .texttip__btn:hover {
+	background: #00e3f4;
+}
+
+.texttip--theme-default.texttip--show .texttip__btn {
+	transition-property: transform;
+	transition-duration: 200ms;
+	transform: translate(0, 0);
+}
+
+.texttip__btn:last-child {
+	margin: 0;
+}
+
+.texttip[data-textip-iconformat="url"] img {
+	display: block;
+	width: auto;
+	height: 1.5em;
+}
+
+.texttip[data-textip-iconformat="svgsprite"] svg {
+	display: block;
+	height: 1.5em;
+	width: 1.5em;
+	pointer-events: none;
+}
+
+.texttip[data-textip-iconformat="font"] i {
+	display: block;
+	font-size: 1.5em;
+}

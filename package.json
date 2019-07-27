@@ -1,0 +1,38 @@
+{
+  "name": "text-tip",
+  "version": "0.0.1",
+  "description": "TextTip is a customisable JavaScript text selection tooltip library with zero dependencies.",
+  "main": "dist/TextTip.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "serve",
+    "watch": "NODE_ENV=development webpack --watch",
+    "build-prod": "NODE_ENV=production webpack",
+    "build-dev": "NODE_ENV=development webpack",
+    "types-file": "tsc -p ./tsconfig.json -d --emitDeclarationOnly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamJaggard/text-tip.git"
+  },
+  "author": "Adam Jaggard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdamJaggard/text-tip/issues"
+  },
+  "homepage": "https://github.com/AdamJaggard/text-tip#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "serve": "^11.1.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
+  }
+}

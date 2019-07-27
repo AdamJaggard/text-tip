@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>TextTip Testing</title>
+	<script src="dist/TextTip.js"></script>
+	<link rel="stylesheet" href="dist/TextTip.css">
+	<link rel="stylesheet" href="img/fontawesome/css/all.css">
+
+	<style>
+		main {
+			max-width: 700px;
+			margin: 0 auto;
+		}
+
+		section {
+			margin: 4em 0;
+		}
+
+		small {
+			font-size: .65em;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<p><img src="img/logo.svg" width="200"></p>
+
+		<section class="scope-one">
+			<h2 id="basic">Basic setup <small>(URL for each icon)</small></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
+			<script>
+				const tip = new TextTip({
+					scope: '.scope-one',
+					iconFormat: 'url',
+					buttons: [
+						{title: 'Copy and paste', icon: 'img/fontawesome/url/copy.svg', callback: console.log},
+						{title: 'Share', icon: 'img/fontawesome/url/share-square.svg', callback: console.log},
+						{title: 'Favourite', icon: 'img/fontawesome/url/heart.svg', callback: console.log},
+						{title: 'Like', icon: 'img/fontawesome/url/thumbs-up.svg', callback: console.log}
+					]
+				});
+			</script>
+		</section>
+
+		<section class="scope-two">
+			<h2 id="basic">SVG Sprite Icons</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
+			<script>
+				const tip2 = new TextTip({
+					scope: '.scope-two',
+					iconFormat: 'svgsprite',
+					buttons: [
+						{title: 'Copy and paste', icon: 'img/fontawesome/sprites-regular.svg#copy', callback: console.log},
+						{title: 'Share', icon: 'img/fontawesome/sprites-regular.svg#share-square', callback: console.log},
+						{title: 'Favourite', icon: 'img/fontawesome/sprites-regular.svg#heart', callback: console.log},
+						{title: 'Like', icon: 'img/fontawesome/sprites-regular.svg#thumbs-up', callback: console.log}
+					]
+				});
+			</script>
+		</section>
+
+		<section class="scope-three">
+			<h2 id="basic">Web Font Icons</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
+			<script>
+				const tip3 = new TextTip({
+					scope: '.scope-three',
+					iconFormat: 'font',
+					buttons: [
+						{title: 'Copy and paste', icon: 'far fa-copy', callback: console.log},
+						{title: 'Share', icon: 'far fa-share-square', callback: console.log},
+						{title: 'Favourite', icon: 'far fa-heart', callback: console.log},
+						{title: 'Like', icon: 'far fa-thumbs-up', callback: console.log}
+					]
+				});
+			</script>
+		</section>
+	</main>
+
+</body>
+</html>

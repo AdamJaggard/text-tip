@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"module": "ES6",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"allowJs": false,
+		"target": "ES6"
+	},
+	"files": [
+		"src/TextTip.ts"
+	]
+}
