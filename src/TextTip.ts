@@ -13,13 +13,13 @@ interface Button {
 };
 
 interface Config {
-	scope?: HTMLElement | string
+	scope?: HTMLElement | string,
 	minLength?: number,
 	maxLength?: number,
 	iconFormat?: IconFormat,
 	buttons: Button[],
 	theme?: 'none' | 'default',
-	mobileOSBehaviour?: 'hide' | 'normal'
+	mobileOSBehaviour?: 'hide' | 'normal',
 	on?: {
 		show?: Function,
 		hide?: Function
@@ -88,6 +88,10 @@ export default class TextTip {
 		inner.classList.add('texttip__inner');
 
 		this.config.buttons.forEach((btn, index) => {
+			if (!btn.callback || !btn.icon || !btn.title) {
+				throw new Error('TextTip: All buttons should have a callback, icon and title property');
+			}
+
 			const btnEl = document.createElement('div');
 			
 			btnEl.classList.add('texttip__btn');
@@ -95,13 +99,21 @@ export default class TextTip {
 			btnEl.setAttribute('data-texttip-btn-index', index.toString());
 			btnEl.style.transitionDelay = (40 * (index + 1)) + 'ms';
 			
-			// Render specific markup for the different icon formats
 			switch (this.config.iconFormat) {
 				case IconFormat.URL:
 					btnEl.innerHTML = `<img src="${btn.icon}" alt="${btn.title}">`;
 					break;
 				case IconFormat.SVGSprite:
-					btnEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" title="${btn.title}" pointer-events="none"><use xlink:href="${btn.icon}"></use></svg>`;
+					/*
+					 * The base64 image overlay hack is needed to make the click events work
+					 * without it the events are swallowed completely for some reason (probably shadow dom related)
+					 */
+					btnEl.innerHTML = `
+						<svg xmlns="http://www.w3.org/2000/svg" title="${btn.title}" pointer-events="none">
+							<use xlink:href="${btn.icon}"></use>
+						</svg>
+						<img class="texttip__btn-cover" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="" aria-hidden="true" />
+						`;
 					break;
 				case IconFormat.Font:
 					btnEl.innerHTML = `<i class="${btn.icon}" title="${btn.title}"></i>`;
@@ -133,10 +145,6 @@ export default class TextTip {
 		});
 	};
 
-	_setButtons = (buttons: Button[]) => {
-		this.config.buttons = buttons;
-	};
-
 	_onSelectionChanged = (event: Event) => {
 		if (this._selectionValid()) {
 			this._updatePosition();
@@ -146,7 +154,7 @@ export default class TextTip {
 		}
 	};
 
-	_selectionValid = () => {
+	_selectionValid = ():boolean => {
 		const selection = window.getSelection();
 		const selStr = selection.toString();
 		const selLength = selStr.length;
@@ -164,7 +172,7 @@ export default class TextTip {
 		const focusParent = focusNodeParent.closest(`[data-texttip-scope-id="${this.id}"]`);
 
 		// Selection must start and end within specified scope
-		return anchorParent && focusParent;
+		return !!anchorParent && !!focusParent;
 	};
 
 	_updatePosition = () => {
@@ -207,9 +215,12 @@ export default class TextTip {
 
 	_onButtonClick = (event: Event) => {
 		event.preventDefault();
+		event.stopPropagation();
+
 		const btn = <HTMLElement> event.currentTarget;
 		const btnIndex = parseInt(btn.getAttribute('data-texttip-btn-index'), 10);
 		const selection = window.getSelection();
+
 		this.config.buttons[btnIndex].callback(selection.toString());
 	}
 
