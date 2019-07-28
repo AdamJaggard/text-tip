@@ -1,5 +1,5 @@
 .texttip {
-	position: fixed;
+	position: absolute;
 	pointer-events: none;
 	background: #fff;
 	transform: translate(-50%, -12px);

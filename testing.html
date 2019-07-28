@@ -27,7 +27,7 @@
 		<p><img src="img/logo.svg" width="200"></p>
 
 		<section class="scope-one">
-			<h2 id="basic">Basic setup <small>(URL for each icon)</small></h2>
+			<h2>Basic setup <small>(URL for each icon)</small></h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
 			<script>
 				const tip = new TextTip({
@@ -44,7 +44,7 @@
 		</section>
 
 		<section class="scope-two">
-			<h2 id="basic">SVG Sprite Icons</h2>
+			<h2>SVG Sprite Icons</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
 			<script>
 				const tip2 = new TextTip({
@@ -61,7 +61,7 @@
 		</section>
 
 		<section class="scope-three">
-			<h2 id="basic">Web Font Icons</h2>
+			<h2>Web Font Icons</h2>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
 			<script>
 				const tip3 = new TextTip({
@@ -73,6 +73,24 @@
 						{title: 'Favourite', icon: 'far fa-heart', callback: console.log},
 						{title: 'Like', icon: 'far fa-thumbs-up', callback: console.log}
 					]
+				});
+			</script>
+		</section>
+
+		<section class="scope-four">
+			<h2>Show / Hide callbacks</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit id temporibus dolorum soluta laboriosam, repellat ipsam facere cumque consequatur. Eos et libero sapiente mollitia accusantium impedit commodi incidunt, accusamus esse.</p>
+			<script>
+				const tip4 = new TextTip({
+					scope: '.scope-four',
+					iconFormat: 'font',
+					buttons: [
+						{title: 'Favourite', icon: 'far fa-heart', callback: console.log}
+					],
+					on: {
+						show: () => console.log('show'),
+						hide: () => console.log('hide')
+					}
 				});
 			</script>
 		</section>

@@ -20,6 +20,10 @@ interface Config {
 	buttons: Button[],
 	theme?: 'none' | 'default',
 	mobileOSBehaviour?: 'hide' | 'normal'
+	on?: {
+		show?: Function,
+		hide?: Function
+	}
 };
 
 export default class TextTip {
@@ -172,10 +176,10 @@ export default class TextTip {
 		const { top: selTop, left: selLeft, width: selWidth } = range.getBoundingClientRect();
 		
 		// Middle of selection width
-		let newTipLeft = selLeft + selWidth / 2;
+		let newTipLeft = selLeft + (selWidth / 2) - window.scrollX;
 
 		// Right above selection 
-		let newTipBottom = window.innerHeight - selTop;
+		let newTipBottom = window.innerHeight - selTop - window.scrollY;
 
 		// Stop tooltip bleeding off of left or right edge of screen
 		// Use a buffer of 20px so we don't bump right against the edge
@@ -210,19 +214,25 @@ export default class TextTip {
 	}
 
 	_show = () => {
-		if (!this.open) {
-			this.open = true;
-			this.tipEl.classList.add('texttip--show');
-			this.tipEl.setAttribute('aria-hidden', 'true');
-		}
+		if (this.open) return;
+		
+		this.open = true;
+		this.tipEl.classList.add('texttip--show');
+		this.tipEl.setAttribute('aria-hidden', 'true');
+
+		// Callback
+		if (this.config.on && typeof this.config.on.show === 'function') this.config.on.show();
 	};
 
 	_hide = () => {
-		if (this.open) {
-			this.open = false;
-			this.tipEl.classList.remove('texttip--show');
-			this.tipEl.setAttribute('aria-hidden', 'false');
-		}
+		if (!this.open) return;
+		
+		this.open = false;
+		this.tipEl.classList.remove('texttip--show');
+		this.tipEl.setAttribute('aria-hidden', 'false');
+
+		// Callback
+		if (this.config.on && typeof this.config.on.hide === 'function') this.config.on.hide();
 	};
 
 	static _getID = () => ++TextTip.instanceCount;
