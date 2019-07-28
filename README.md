@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/AdamJaggard/text-tip/master/img/logo.svg" alt="TextTip logo" width="200">
+<img src="https://raw.githubusercontent.com/AdamJaggard/text-tip/master/img/logo.png" alt="TextTip logo" width="200">
 
 # TextTip - Tooltips for selected text
 
